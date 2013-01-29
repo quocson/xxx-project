@@ -1,0 +1,10 @@
+canvas {
+	display: block;
+}
+#canvasBg {
+    margin: 5% auto 0px;
+}
+
+#canvasJet, #canvasEnemy, #canvasHUD, #canvasLife {
+    margin: -500px auto;
+}
