@@ -35,6 +35,15 @@ var decline = 60;
 var imgSprite = new Image();
 imgSprite.src = 'images/sprite.png';
 imgSprite.addEventListener('load', init, false);
+var exploSound = new Audio('audio/explosion.mp3'); 
+var bombSound = new Audio('audio/bomb.mp3'); 
+var lifeSound = new Audio('audio/life.mp3'); 
+var bgMusic = new Audio('audio/battle.mp3'); 
+bgMusic.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+bgMusic.play();
 var requestAnimFrame =  window.requestAnimationFrame ||
 window.webkitRequestAnimationFrame ||
 window.mozRequestAnimationFrame ||
@@ -246,13 +255,19 @@ Jet.prototype.checkDirection = function() {
 Jet.prototype.drawAllBullets = function() {
     for (var i = 0; i < this.bullets.length; i++) {
         if (this.bullets[i].drawX >= 0) this.bullets[i].draw();
-        if (this.bullets[i].explosion.hasHit) this.bullets[i].explosion.draw();
+        if (this.bullets[i].explosion.hasHit) {
+                exploSound.play();
+                this.bullets[i].explosion.draw();
+            }
     }
 };
 
 Jet.prototype.drawAllExplosions = function() {
     for (var i = 0; i < this.explosions.length; i++) {
-        if (this.explosions[i].hasHit) this.explosions[i].draw();
+        if (this.explosions[i].hasHit) {
+            bombSound.play();
+            this.explosions[i].draw();
+        }
     }
 };
 
@@ -281,9 +296,14 @@ Jet.prototype.updateScore = function(points) {
 Jet.prototype.updateLife = function(lifes) {
     this.life += lifes;
     if(this.life < 0)
+    {
         isPlaying = false;
+    }
     else
+    {
+        lifeSound.play();
         updateHUD();
+    }
 };
 
 
