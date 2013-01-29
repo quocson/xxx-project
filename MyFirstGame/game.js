@@ -145,7 +145,7 @@ function moveBg() {
 function updateHUD() {
     ctxHUD.clearRect(0, 0, gameWidth, gameHeight);
     ctxHUD.fillText("FPS: " + gameFPS + " | Life: " + myJet.life + " | Score: " +
-                      myJet.score + " | High Score: XXX", 20, 480);
+                      myJet.score + " | High Score: " + myJet.highScore, 20, 480);
 }
 // end of main functions
 
@@ -177,6 +177,10 @@ function Jet() {
         this.bullets[this.bullets.length] = new Bullet(this);
     }
     this.score = 0;
+    this.highScore = 0;
+    var temp = localStorage.getItem("highScore");
+       if (temp != undefined)
+          this.highScore = temp;
     this.life = 1;
     this.reborn = false;
     this.currentFrame = 0;
@@ -265,6 +269,12 @@ Jet.prototype.checkShooting = function() {
 
 Jet.prototype.updateScore = function(points) {
     this.score += points;
+    if(supports_html5_storage() && this.score > this.highScore)
+    {
+        this.highScore = this.score;
+        localStorage.setItem("highScore", this.score );
+    }
+
     updateHUD();
 };
 
@@ -577,5 +587,17 @@ function checkKeyUp(e) {
         e.preventDefault();
     }
 }
-
+function supports_html5_storage()
+       {
+          try
+          {
+             return 'localStorage' in window &&
+                    window['localStorage'] !== null &&
+                    window['localStorage'] !== undefined;
+          }
+          catch (e)
+          {
+             return false;
+          }
+       }
 // end of event functions
