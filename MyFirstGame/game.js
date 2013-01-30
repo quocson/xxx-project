@@ -117,6 +117,16 @@ function loop() {
         myJet.draw();
         drawAllEnemies();
         drawAllLifes();
+        if(decline == 0)
+        {
+        
+            ctxHUD.clearRect(0, 0, gameWidth, gameHeight);
+            clearCtxLife();
+            clearCtxEnemy();
+            clearCtxJet();
+            isPlaying = false;
+            drawMenu();
+        }
         requestAnimFrame(loop);
     }
 }
@@ -154,7 +164,7 @@ function moveBg() {
 function updateHUD() {
     ctxHUD.clearRect(0, 0, gameWidth, gameHeight);
     ctxHUD.fillText("FPS: " + gameFPS + " | Life: " + myJet.life + " | Score: " +
-                      myJet.score + " | High Score: " + myJet.highScore, 20, 480);
+      myJet.score + " | High Score: " + myJet.highScore, 20, 480);
 }
 // end of main functions
 
@@ -188,16 +198,16 @@ function Jet() {
     this.score = 0;
     this.highScore = 0;
     var temp = localStorage.getItem("highScore");
-       if (temp != undefined)
-          this.highScore = temp;
-    this.life = 1;
-    this.reborn = false;
-    this.currentFrame = 0;
-    this.totalFrames = 60;
-    this.explosions = [];
-    for (var i = 0; i < 3; i++) {
-        this.explosions[this.explosions.length] = new Explosion();
-    }
+    if (temp != undefined)
+      this.highScore = temp;
+  this.life = 1;
+  this.reborn = false;
+  this.currentFrame = 0;
+  this.totalFrames = 60;
+  this.explosions = [];
+  for (var i = 0; i < 3; i++) {
+    this.explosions[this.explosions.length] = new Explosion();
+}
 }
 
 Jet.prototype.draw = function() {
@@ -256,9 +266,9 @@ Jet.prototype.drawAllBullets = function() {
     for (var i = 0; i < this.bullets.length; i++) {
         if (this.bullets[i].drawX >= 0) this.bullets[i].draw();
         if (this.bullets[i].explosion.hasHit) {
-                exploSound.play();
-                this.bullets[i].explosion.draw();
-            }
+            exploSound.play();
+            this.bullets[i].explosion.draw();
+        }
     }
 };
 
@@ -556,7 +566,13 @@ function mouseClicked(e) {
     mouseX = e.pageX - canvasBg.offsetLeft;
     mouseY = e.pageY - canvasBg.offsetTop;
     if (!isPlaying) {
-        if (btnPlay.checkClicked()) playGame();
+        if (btnPlay.checkClicked()) {
+            isPlaying = true;
+            myJet.score = 0;
+            myJet.life = 1;
+            decline = 60;
+            playGame();
+        }
     }
 }
 
@@ -608,16 +624,16 @@ function checkKeyUp(e) {
     }
 }
 function supports_html5_storage()
-       {
-          try
-          {
-             return 'localStorage' in window &&
-                    window['localStorage'] !== null &&
-                    window['localStorage'] !== undefined;
-          }
-          catch (e)
-          {
-             return false;
-          }
-       }
+{
+  try
+  {
+   return 'localStorage' in window &&
+   window['localStorage'] !== null &&
+   window['localStorage'] !== undefined;
+}
+catch (e)
+{
+   return false;
+}
+}
 // end of event functions
