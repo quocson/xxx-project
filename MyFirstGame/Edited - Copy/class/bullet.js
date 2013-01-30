@@ -40,4 +40,5 @@ Bullet.prototype.fire = function(startX, startY) {
 };
 
 Bullet.prototype.recycle = function() {
+    this.drawX = -20;
 };
