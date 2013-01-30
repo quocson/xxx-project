@@ -35,10 +35,11 @@ var decline = 60;
 var imgSprite = new Image();
 imgSprite.src = 'images/sprite.png';
 imgSprite.addEventListener('load', init, false);
-var exploSound = new Audio('audios/explosion.mp3'); 
-var bombSound = new Audio('audios/bomb.mp3'); 
-var lifeSound = new Audio('audios/life.mp3'); 
-var bgMusic = new Audio('audios/battle.mp3'); 
+var exploSound = new Audio('audios/explosion.mp3');
+var bombSound = new Audio('audios/bomb.mp3');
+var lifeSound = new Audio('audios/life.mp3');
+var moveSound = new Audio('audios/move.mp3');
+var bgMusic = new Audio('audios/battle.mp3');
 bgMusic.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
@@ -87,7 +88,7 @@ function loop() {
     currentTime = new Date();
     diffTime = Math.ceil((currentTime.getTime() - lastTime.getTime()));
 
-    if (diffTime >= 1000) 
+    if (diffTime >= 1000)
     {
         gameFPS = frameCount;
         frameCount = 0;
@@ -177,20 +178,14 @@ function clearCtxJet() {
     ctxJet.clearRect(0, 0, gameWidth, gameHeight);
 }
 
-
-
 function clearCtxEnemy() {
     ctxEnemy.clearRect(0, 0, gameWidth, gameHeight);
 }
 
 
-
-
 function clearCtxLife() {
     ctxLife.clearRect(0, 0, gameWidth, gameHeight);
 }
-
-
 
 
 // event functions

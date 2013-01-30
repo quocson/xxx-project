@@ -58,6 +58,6 @@ Life.prototype.checkHitJet = function() {
             this.drawY + this.height >= this.jet.drawY &&
             this.drawY + this.height <= this.jet.drawY + this.jet.height)) {
         this.hasHit = true;
-    this.jet.updateLife(this.rewardLifes);
-}
+        this.jet.updateLife(this.rewardLifes);
+    }
 };

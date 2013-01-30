@@ -30,7 +30,6 @@ function Jet() {
       this.highScore = temp;
     this.life = 1;
     this.reborn = false;
-    this.state = 
     this.currentFrame = 0;
     this.totalFrames = 60;
     this.explosions = [];
@@ -64,7 +63,6 @@ Jet.prototype.update = function(){
     {
         this.checkDirection();
         this.updateCoors();
-        ctxJet.drawImage(imgSprite, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);
     }
     for (var i = 0; i < this.explosions.length; i++) {
         if (this.explosions[i].hasHit) {
@@ -115,15 +113,19 @@ Jet.prototype.updateCoors = function() {
 Jet.prototype.checkDirection = function() {
     if (this.isUpKey && this.topY > 0) {
         this.drawY -= this.speed;
+        moveSound.play();
     }
     if (this.isRightKey && this.rightX < gameWidth) {
         this.drawX += this.speed;
+        moveSound.play();
     }
     if (this.isDownKey && this.bottomY < gameHeight) {
         this.drawY += this.speed;
+        moveSound.play();
     }
     if (this.isLeftKey && this.leftX > 0) {
         this.drawX -= this.speed;
+        moveSound.play();
     }
 };
 
