@@ -35,10 +35,10 @@ var decline = 60;
 var imgSprite = new Image();
 imgSprite.src = 'images/sprite.png';
 imgSprite.addEventListener('load', init, false);
-var exploSound = new Audio('audio/explosion.mp3'); 
-var bombSound = new Audio('audio/bomb.mp3'); 
-var lifeSound = new Audio('audio/life.mp3'); 
-var bgMusic = new Audio('audio/battle.mp3'); 
+var exploSound = new Audio('audios/explosion.mp3'); 
+var bombSound = new Audio('audios/bomb.mp3'); 
+var lifeSound = new Audio('audios/life.mp3'); 
+var bgMusic = new Audio('audios/battle.mp3'); 
 bgMusic.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
