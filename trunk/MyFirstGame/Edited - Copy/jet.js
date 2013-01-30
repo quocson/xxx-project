@@ -158,6 +158,7 @@ Jet.prototype.updateLife = function(lifes) {
     }
     else
     {
-        lifeSound.play();
+        if(lifes > 0)
+            lifeSound.play();
     }
 };

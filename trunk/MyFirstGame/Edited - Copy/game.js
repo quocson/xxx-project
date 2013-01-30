@@ -110,7 +110,6 @@ function update(){
 }
 function draw(){
     clearMyContext();
-    
     moveBg();
 
     for (var i = 0; i < enemies.length; i++) {
