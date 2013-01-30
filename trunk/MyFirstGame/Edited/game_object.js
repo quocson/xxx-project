@@ -172,34 +172,10 @@ function moveBg() {
 }
 
 
-// end of main functions
-
-// jet functions
-
 
 function clearCtxJet() {
     ctxJet.clearRect(0, 0, gameWidth, gameHeight);
 }
-
-// end of jet functions
-
-
-
-
-// bullet functions
-
-
-// end of bullet functions
-
-
-
-// explosion functions
-
-
-
-// end of explosion functions
-
-// enemy functions
 
 
 
@@ -209,27 +185,12 @@ function clearCtxEnemy() {
 
 
 
-// end enemy functions
-
-// life functions
-
 
 function clearCtxLife() {
     ctxLife.clearRect(0, 0, gameWidth, gameHeight);
 }
 
 
-
-// end life functions
-
-
-
-
-// button functions
-
-
-
-// end of button functions
 
 
 // event functions
